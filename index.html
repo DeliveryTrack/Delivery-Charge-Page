@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Vishv Book Publisher | Delivery Status</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 450px;
+    }
+
+    .header {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      border-radius: 18px 18px 0 0;
+    }
+
+    .logo {
+      width: 58px;
+      height: 58px;
+      margin: auto;
+      background: white;
+      color: #111827;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 13px;
+      opacity: .8;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .title {
+      text-align: center;
+      font-size: 19px;
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 7px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      outline: none;
+      font-size: 16px;
+      margin-bottom: 13px;
+    }
+
+    input:focus {
+      border-color: #111827;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      background: #111827;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1f2937;
+    }
+
+    .result {
+      display: none;
+      margin-top: 22px;
+    }
+
+    .success {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      padding: 13px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .info-box {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .row span:first-child {
+      color: #6b7280;
+    }
+
+    .row span:last-child {
+      color: #111827;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    .pending {
+      color: #b45309 !important;
+    }
+
+    .status {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 12px;
+      background: #f9fafb;
+    }
+
+    .status-title {
+      font-weight: bold;
+      margin-bottom: 13px;
+      color: #111827;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .circle {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #16a34a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .current {
+      background: #2563eb;
+    }
+
+    .footer {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 11px;
+      margin-top: 20px;
+    }
+
+    .error {
+      display: none;
+      margin-top: 15px;
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">VB</div>
+    <h1>Vishv Book Publisher</h1>
+    <p>Handwriting Project Delivery Services</p>
+  </div>
+
+  <div class="card">
+
+    <div class="title">Check Delivery Status</div>
+    <div class="subtitle">
+      Enter your registered mobile number to check your status.
+    </div>
+
+    <label for="mobile">Registered Mobile Number</label>
+
+    <input
+      type="tel"
+      id="mobile"
+      maxlength="10"
+      placeholder="Enter 10 digit mobile number"
+      inputmode="numeric"
+    >
+
+    <button onclick="checkStatus()">
+      🔍 Check Status
+    </button>
+
+    <div class="error" id="error">
+      No delivery record found for this mobile number.
+    </div>
+
+    <div class="result" id="result">
+
+      <div class="success">
+        ✓ Delivery Record Found
+      </div>
+
+      <div class="info-box">
+
+        <div class="row">
+          <span>Client Name</span>
+          <span>Ashika</span>
+        </div>
+
+        <div class="row">
+          <span>Mobile Number</span>
+          <span>******9169</span>
+        </div>
+
+        <div class="row">
+          <span>Project</span>
+          <span>Handwriting Project</span>
+        </div>
+
+        <div class="row">
+          <span>City</span>
+          <span>Chennai</span>
+        </div>
+
+        <div class="row">
+          <span>State</span>
+          <span>Tamil Nadu</span>
+        </div>
+
+        <div class="row">
+          <span>Delivery Charge</span>
+          <span class="pending">Pending</span>
+        </div>
+
+        <div class="row">
+          <span>Current Location</span>
+          <span>Chennai</span>
+        </div>
+
+        <div class="row">
+          <span>Tracking ID</span>
+          <span>VBP-600007</span>
+        </div>
+
+      </div>
+
+      <div class="status">
+
+        <div class="status-title">
+          📦 Delivery Progress
+        </div>
+
+        <div class="step">
+          <div class="circle">✓</div>
+          <span>Registration Confirmed</span>
+        </div>
+
+        <div class="step">
+          <div class="circle">✓</div>
+          <span>Book Prepared</span>
+        </div>
+
+        <div class="step">
+          <div class="circle">✓</div>
+          <span>Dispatched</span>
+        </div>
+
+        <div class="step">
+          <div class="circle current">→</div>
+          <span><b>In Transit</b></span>
+        </div>
+
+        <div class="step">
+          <div class="circle" style="background:#d1d5db;">5</div>
+          <span>Out for Delivery</span>
+        </div>
+
+        <div class="step">
+          <div class="circle" style="background:#d1d5db;">6</div>
+          <span>Delivered</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      © 2026 Vishv Book Publisher • Delivery Status Portal
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+
+function checkStatus() {
+
+  const mobile = document.getElementById("mobile").value.trim();
+
+  const result = document.getElementById("result");
+  const error = document.getElementById("error");
+
+  result.style.display = "none";
+  error.style.display = "none";
+
+  // Demo registered number
+  const registeredNumber = "9095899169";
+
+  if (mobile === registeredNumber) {
+
+    result.style.display = "block";
+
+  } else {
+
+    error.style.display = "block";
+
+  }
+}
+
+document.getElementById("mobile").addEventListener("input", function() {
+  this.value = this.value.replace(/\D/g, "").slice(0, 10);
+});
+
+</script>
+
+</body>
+          </html>

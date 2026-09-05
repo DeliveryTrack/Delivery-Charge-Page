@@ -158,16 +158,46 @@
 
     .row span:first-child {
       color: #6b7280;
+      min-width: 110px;
     }
 
     .row span:last-child {
       color: #111827;
       font-weight: bold;
       text-align: right;
+      word-break: break-word;
     }
 
     .pending {
       color: #b45309 !important;
+    }
+
+    .address-box {
+      margin-top: 15px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      background: #fafafa;
+    }
+
+    .address-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #111827;
+      margin-bottom: 12px;
+    }
+
+    .address {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #374151;
+    }
+
+    .signature {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #e5e7eb;
+      font-weight: bold;
     }
 
     .status {
@@ -194,6 +224,7 @@
     .circle {
       width: 25px;
       height: 25px;
+      min-width: 25px;
       border-radius: 50%;
       background: #16a34a;
       color: white;
@@ -242,6 +273,7 @@
   <div class="card">
 
     <div class="title">Check Delivery Status</div>
+
     <div class="subtitle">
       Enter your registered mobile number to check your status.
     </div>
@@ -270,16 +302,17 @@
         ✓ Delivery Record Found
       </div>
 
+      <!-- CLIENT DETAILS -->
       <div class="info-box">
 
         <div class="row">
           <span>Client Name</span>
-          <span>Ashika</span>
+          <span>S.Kalaivani</span>
         </div>
 
         <div class="row">
           <span>Mobile Number</span>
-          <span>******9169</span>
+          <span>******1211</span>
         </div>
 
         <div class="row">
@@ -289,7 +322,7 @@
 
         <div class="row">
           <span>City</span>
-          <span>Chennai</span>
+          <span>Namakkal</span>
         </div>
 
         <div class="row">
@@ -304,16 +337,61 @@
 
         <div class="row">
           <span>Current Location</span>
-          <span>Chennai</span>
+          <span>Namakkal</span>
         </div>
 
         <div class="row">
           <span>Tracking ID</span>
-          <span>VBP-600007</span>
+          <span>VBP-637212</span>
         </div>
 
       </div>
 
+      <!-- DELIVERY ADDRESS -->
+      <div class="address-box">
+
+        <div class="address-title">
+          📦 Delivery Address
+        </div>
+
+        <div class="address">
+
+          <b>👤 Name:</b> S.Kalaivani<br><br>
+
+          <b>📞 Mobile:</b> 9597561211<br><br>
+
+          <b>🏠 House/Flat No.:</b><br>
+          2/173, Old Post Office Opposite,
+          Vaiyappamalai Road,
+          Velagoundampatti<br><br>
+
+          <b>🛣️ Street/Area:</b><br>
+          Velagoundampatti<br><br>
+
+          <b>📍 Landmark:</b><br>
+          Old Post Office Opposite,
+          Vaiyappamalai Road,
+          Velagoundampatti, Namakkal<br><br>
+
+          <b>🏙️ City:</b> Namakkal<br><br>
+
+          <b>🌍 State:</b> Tamil Nadu<br><br>
+
+          <b>📮 PIN Code:</b><br>
+          Namakkal - 637001<br>
+          Velagoundampatti - 637212<br><br>
+
+          <b>🇮🇳 Country:</b> India
+
+          <div class="signature">
+            ✍️ Signature: kalaivani
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- DELIVERY PROGRESS -->
       <div class="status">
 
         <div class="status-title">
@@ -374,8 +452,8 @@ function checkStatus() {
   result.style.display = "none";
   error.style.display = "none";
 
-  // Demo registered number
-  const registeredNumber = "9095899169";
+  // Registered mobile number
+  const registeredNumber = "9597561211";
 
   if (mobile === registeredNumber) {
 
@@ -395,4 +473,4 @@ document.getElementById("mobile").addEventListener("input", function() {
 </script>
 
 </body>
-          </html>
+</html>0

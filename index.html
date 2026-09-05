@@ -4,473 +4,842 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Vishv Book Publisher | Delivery Status</title>
+  <title>Hamper Box Parcel Tracking</title>
+
+  <meta name="description"
+        content="Hamper Box Parcel Tracking - Enter your registered mobile number to check parcel status.">
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
     }
 
     body {
-      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f4f7fb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+      color: #172033;
     }
 
     .container {
       width: 100%;
-      max-width: 450px;
-    }
-
-    .header {
-      background: #111827;
-      color: white;
-      text-align: center;
-      padding: 25px 15px;
-      border-radius: 18px 18px 0 0;
-    }
-
-    .logo {
-      width: 58px;
-      height: 58px;
+      max-width: 760px;
       margin: auto;
-      background: white;
-      color: #111827;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 25px;
-      font-weight: bold;
-      margin-bottom: 12px;
+      padding: 45px 20px 30px;
     }
 
-    .header h1 {
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-    .header p {
-      font-size: 13px;
-      opacity: .8;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 0 0 18px 18px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
-    }
-
-    .title {
+    .brand {
       text-align: center;
-      font-size: 19px;
-      font-weight: bold;
-      color: #1f2937;
-      margin-bottom: 7px;
+      font-size: 48px;
+      font-weight: 800;
+      color: #166534;
+      margin-bottom: 25px;
+    }
+
+    .brand span {
+      vertical-align: middle;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 48px;
+      margin: 0 0 35px;
+      font-weight: 800;
     }
 
     .subtitle {
       text-align: center;
-      color: #6b7280;
-      font-size: 13px;
-      margin-bottom: 22px;
+      color: #64748b;
+      font-size: 25px;
+      line-height: 1.5;
+      margin: 0 auto 45px;
+      max-width: 700px;
+    }
+
+    .track-box {
+      background: white;
+      border-radius: 30px;
+      padding: 40px 35px 30px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
     }
 
     label {
       display: block;
-      font-size: 14px;
-      font-weight: bold;
-      color: #374151;
-      margin-bottom: 8px;
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 18px;
     }
 
     input {
       width: 100%;
-      padding: 14px;
+      height: 95px;
       border: 1px solid #d1d5db;
-      border-radius: 10px;
+      border-radius: 20px;
+      padding: 0 25px;
+      font-size: 27px;
       outline: none;
-      font-size: 16px;
-      margin-bottom: 13px;
     }
 
     input:focus {
-      border-color: #111827;
+      border-color: #15803d;
+      box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.12);
     }
 
-    button {
+    .track-button {
       width: 100%;
+      height: 95px;
+      margin-top: 25px;
       border: none;
-      padding: 14px;
-      border-radius: 10px;
-      background: #111827;
+      border-radius: 20px;
+      background: #15803d;
       color: white;
-      font-size: 15px;
-      font-weight: bold;
+      font-size: 28px;
+      font-weight: 800;
       cursor: pointer;
     }
 
-    button:hover {
-      background: #1f2937;
+    .track-button:active {
+      transform: scale(0.99);
+    }
+
+    .message {
+      text-align: center;
+      color: #c62828;
+      font-size: 21px;
+      margin: 25px 0 0;
     }
 
     .result {
+      position: relative;
+      margin-top: 30px;
+      background: white;
+      border-radius: 25px;
+      padding: 35px 30px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .hidden {
       display: none;
-      margin-top: 22px;
     }
 
-    .success {
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      color: #065f46;
-      padding: 13px;
-      border-radius: 10px;
-      text-align: center;
-      font-weight: bold;
-      margin-bottom: 15px;
+    .close-result {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 28px;
+      cursor: pointer;
     }
 
-    .info-box {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      overflow: hidden;
+    .result h2 {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .result h3 {
+      font-size: 22px;
+      margin-top: 30px;
+      margin-bottom: 18px;
     }
 
     .row {
       display: flex;
       justify-content: space-between;
-      gap: 15px;
-      padding: 13px;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 17px;
     }
 
-    .row:last-child {
-      border-bottom: none;
+    .key {
+      color: #64748b;
+      font-weight: 600;
+      min-width: 145px;
     }
 
-    .row span:first-child {
-      color: #6b7280;
-      min-width: 110px;
-    }
-
-    .row span:last-child {
-      color: #111827;
-      font-weight: bold;
+    .value {
       text-align: right;
+      font-weight: 700;
+      max-width: 65%;
       word-break: break-word;
     }
 
-    .pending {
-      color: #b45309 !important;
+    .status {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 20px;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 14px;
+    }
+
+    .transit-status {
+      background: #fef3c7;
+      color: #92400e;
     }
 
     .address-box {
-      margin-top: 15px;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 15px;
-      background: #fafafa;
-    }
-
-    .address-title {
-      font-size: 15px;
-      font-weight: bold;
-      color: #111827;
-      margin-bottom: 12px;
-    }
-
-    .address {
-      font-size: 13px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 18px;
       line-height: 1.6;
-      color: #374151;
+      color: #334155;
+      font-size: 16px;
     }
 
-    .signature {
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px solid #e5e7eb;
-      font-weight: bold;
-    }
-
-    .status {
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 12px;
-      background: #f9fafb;
-    }
-
-    .status-title {
-      font-weight: bold;
-      margin-bottom: 13px;
-      color: #111827;
+    .tracking {
+      margin-top: 20px;
     }
 
     .step {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 12px 0;
-      font-size: 14px;
+      align-items: flex-start;
+      gap: 14px;
     }
 
-    .circle {
-      width: 25px;
-      height: 25px;
-      min-width: 25px;
+    .step-icon {
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
       border-radius: 50%;
-      background: #16a34a;
+      background: #15803d;
       color: white;
       display: flex;
-      align-items: center;
       justify-content: center;
-      font-size: 12px;
+      align-items: center;
       font-weight: bold;
     }
 
-    .current {
-      background: #2563eb;
+    .step.current .step-icon {
+      background: #f59e0b;
+    }
+
+    .step-text strong {
+      display: block;
+      font-size: 17px;
+    }
+
+    .step-text small {
+      display: block;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .line {
+      height: 30px;
+      border-left: 3px solid #d1d5db;
+      margin-left: 14px;
+    }
+
+    .distance-box {
+      margin-top: 25px;
+      padding: 20px;
+      background: #f8fafc;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .distance-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+
+    .distance-track {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .distance-bar {
+      flex: 1;
+      height: 9px;
+      background: #d1d5db;
+      border-radius: 20px;
+      position: relative;
+    }
+
+    .distance-fill {
+      width: 25%;
+      height: 100%;
+      background: #15803d;
+      border-radius: 20px;
+    }
+
+    .distance-box p {
+      color: #64748b;
+      margin-bottom: 0;
+      font-size: 14px;
     }
 
     .footer {
       text-align: center;
-      color: #9ca3af;
-      font-size: 11px;
-      margin-top: 20px;
+      color: #64748b;
+      margin-top: 45px;
+      line-height: 1.7;
     }
 
-    .error {
-      display: none;
-      margin-top: 15px;
-      background: #fef2f2;
-      color: #b91c1c;
-      border: 1px solid #fecaca;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 13px;
+    @media (max-width: 600px) {
+
+      .container {
+        padding: 35px 15px 25px;
+      }
+
+      .brand {
+        font-size: 36px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      .subtitle {
+        font-size: 21px;
+      }
+
+      .track-box {
+        padding: 30px 20px 25px;
+        border-radius: 25px;
+      }
+
+      label {
+        font-size: 22px;
+      }
+
+      input,
+      .track-button {
+        height: 80px;
+        font-size: 23px;
+      }
+
+      .row {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .value {
+        max-width: 100%;
+        text-align: left;
+      }
+
+      .key {
+        min-width: auto;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<div class="container">
+<main class="container">
 
-  <div class="header">
-    <div class="logo">VB</div>
-    <h1>Vishv Book Publisher</h1>
-    <p>Handwriting Project Delivery Services</p>
+  <!-- BRAND -->
+  <div class="brand">
+    🎁 <span>Hamper Box</span>
   </div>
 
-  <div class="card">
+  <!-- TITLE -->
+  <h1>Parcel Tracking</h1>
 
-    <div class="title">Check Delivery Status</div>
+  <p class="subtitle">
+    Enter your registered mobile number to track your
+    Hamper Box parcel.
+  </p>
 
-    <div class="subtitle">
-      Enter your registered mobile number to check your status.
-    </div>
 
-    <label for="mobile">Registered Mobile Number</label>
+  <!-- SEARCH BOX -->
+  <section class="track-box">
+
+    <label for="mobile">
+      Mobile Number
+    </label>
 
     <input
-      type="tel"
       id="mobile"
-      maxlength="10"
-      placeholder="Enter 10 digit mobile number"
+      type="tel"
       inputmode="numeric"
+      maxlength="10"
+      autocomplete="tel"
+      placeholder="Enter 10 digit mobile number"
+      oninput="this.value=this.value.replace(/\D/g,'').slice(0,10)"
     >
 
-    <button onclick="checkStatus()">
-      🔍 Check Status
+    <button
+      type="button"
+      class="track-button"
+      onclick="trackParcel()"
+    >
+      Track Parcel
     </button>
 
-    <div class="error" id="error">
-      No delivery record found for this mobile number.
-    </div>
+    <p id="message" class="message"></p>
 
-    <div class="result" id="result">
+  </section>
 
-      <div class="success">
-        ✓ Delivery Record Found
+
+  <!-- RESULT -->
+  <section
+    id="result"
+    class="result hidden"
+    aria-live="polite">
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>🎁 Hamper Box</div>
+    <small>Parcel Tracking System</small>
+  </footer>
+
+</main>
+
+
+<script>
+
+  /* ==============================
+     S. KALAIVANI PARCEL DATA
+     ============================== */
+
+  const parcel = {
+
+    name: "S.Kalaivani",
+
+    mobile: "9597561211",
+
+    parcelId: "GH959756",
+
+    project: "Hamper Box Parcel",
+
+    courier: "GiftHub Delivery",
+
+    dispatchLocation: "Tamil Nadu",
+
+    route: "Namakkal → Chennai",
+
+    payment: "Prepaid",
+
+    status: "In Transit",
+
+    distance: "20 KM",
+
+    expected: "05 September 2026",
+
+    updated: "05 September 2026, 10:00 AM",
+
+    address: {
+
+      house:
+        "2/173, Old Post Office Opposite, Vaiyappamalai Road, Velagoundampatti",
+
+      street:
+        "Velagoundampatti",
+
+      landmark:
+        "Old Post Office Opposite, Vaiyappamalai Road, Velagoundampatti, Namakkal",
+
+      city:
+        "Namakkal",
+
+      state:
+        "Tamil Nadu",
+
+      pin:
+        "637212",
+
+      country:
+        "India"
+
+    }
+
+  };
+
+
+  /* ==============================
+     TRACK PARCEL
+     ============================== */
+
+  function trackParcel() {
+
+    const input =
+      document.getElementById("mobile");
+
+    const mobile =
+      input.value.replace(/\D/g, "");
+
+    const message =
+      document.getElementById("message");
+
+    const result =
+      document.getElementById("result");
+
+
+    result.classList.add("hidden");
+
+    message.textContent = "";
+
+
+    if (mobile.length !== 10) {
+
+      message.textContent =
+        "Please enter a valid 10 digit mobile number.";
+
+      return;
+
+    }
+
+
+    if (mobile !== parcel.mobile) {
+
+      message.textContent =
+        "No parcel found for this mobile number.";
+
+      return;
+
+    }
+
+
+    result.innerHTML = `
+
+      <button
+        class="close-result"
+        onclick="closeResult()"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+
+      <h2>
+        📦 Parcel Details
+      </h2>
+
+
+      <div class="row">
+        <span class="key">Name</span>
+        <span class="value">
+          ${parcel.name}
+        </span>
       </div>
 
-      <!-- CLIENT DETAILS -->
-      <div class="info-box">
 
-        <div class="row">
-          <span>Client Name</span>
-          <span>S.Kalaivani</span>
-        </div>
-
-        <div class="row">
-          <span>Mobile Number</span>
-          <span>******1211</span>
-        </div>
-
-        <div class="row">
-          <span>Project</span>
-          <span>Handwriting Project</span>
-        </div>
-
-        <div class="row">
-          <span>City</span>
-          <span>Namakkal</span>
-        </div>
-
-        <div class="row">
-          <span>State</span>
-          <span>Tamil Nadu</span>
-        </div>
-
-        <div class="row">
-          <span>Delivery Charge</span>
-          <span class="pending">Pending</span>
-        </div>
-
-        <div class="row">
-          <span>Current Location</span>
-          <span>Namakkal</span>
-        </div>
-
-        <div class="row">
-          <span>Tracking ID</span>
-          <span>VBP-637212</span>
-        </div>
-
+      <div class="row">
+        <span class="key">Mobile</span>
+        <span class="value">
+          ${parcel.mobile}
+        </span>
       </div>
 
-      <!-- DELIVERY ADDRESS -->
+
+      <div class="row">
+        <span class="key">Parcel ID</span>
+        <span class="value">
+          ${parcel.parcelId}
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Project</span>
+        <span class="value">
+          ${parcel.project}
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Courier</span>
+        <span class="value">
+          ${parcel.courier}
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Dispatch Location</span>
+        <span class="value">
+          ${parcel.dispatchLocation}
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Route</span>
+        <span class="value">
+          ${parcel.route}
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Payment</span>
+        <span class="value">
+          <span class="status">
+            ${parcel.payment}
+          </span>
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Status</span>
+        <span class="value">
+          <span class="status transit-status">
+            ${parcel.status}
+          </span>
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Current Progress</span>
+        <span class="value">
+          ${parcel.distance} Travelled
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Expected Delivery</span>
+        <span class="value">
+          ${parcel.expected}
+        </span>
+      </div>
+
+
+      <div class="row">
+        <span class="key">Last Updated</span>
+        <span class="value">
+          ${parcel.updated}
+        </span>
+      </div>
+
+
+      <h3>
+        🏠 Delivery Address
+      </h3>
+
+
       <div class="address-box">
 
-        <div class="address-title">
-          📦 Delivery Address
+        <strong>House / Flat No.:</strong><br>
+        ${parcel.address.house}
+
+        <br><br>
+
+        <strong>Street / Area:</strong><br>
+        ${parcel.address.street}
+
+        <br><br>
+
+        <strong>Landmark:</strong><br>
+        ${parcel.address.landmark}
+
+        <br><br>
+
+        <strong>City:</strong>
+        ${parcel.address.city}
+
+        <br>
+
+        <strong>State:</strong>
+        ${parcel.address.state}
+
+        <br>
+
+        <strong>PIN Code:</strong>
+        ${parcel.address.pin}
+
+        <br>
+
+        <strong>Country:</strong>
+        ${parcel.address.country}
+
+      </div>
+
+
+      <h3>
+        📍 Tracking Progress
+      </h3>
+
+
+      <div class="tracking">
+
+        <div class="step">
+
+          <div class="step-icon">
+            ✓
+          </div>
+
+          <div class="step-text">
+
+            <strong>
+              Order Confirmed
+            </strong>
+
+            <small>
+              Order successfully confirmed
+            </small>
+
+          </div>
+
         </div>
 
-        <div class="address">
 
-          <b>👤 Name:</b> S.Kalaivani<br><br>
+        <div class="line"></div>
 
-          <b>📞 Mobile:</b> 9597561211<br><br>
 
-          <b>🏠 House/Flat No.:</b><br>
-          2/173, Old Post Office Opposite,
-          Vaiyappamalai Road,
-          Velagoundampatti<br><br>
+        <div class="step">
 
-          <b>🛣️ Street/Area:</b><br>
-          Velagoundampatti<br><br>
+          <div class="step-icon">
+            ✓
+          </div>
 
-          <b>📍 Landmark:</b><br>
-          Old Post Office Opposite,
-          Vaiyappamalai Road,
-          Velagoundampatti, Namakkal<br><br>
+          <div class="step-text">
 
-          <b>🏙️ City:</b> Namakkal<br><br>
+            <strong>
+              Parcel Prepared
+            </strong>
 
-          <b>🌍 State:</b> Tamil Nadu<br><br>
+            <small>
+              Parcel packed and ready
+            </small>
 
-          <b>📮 PIN Code:</b><br>
-          Namakkal - 637001<br>
-          Velagoundampatti - 637212<br><br>
+          </div>
 
-          <b>🇮🇳 Country:</b> India
+        </div>
 
-          <div class="signature">
-            ✍️ Signature: kalaivani
+
+        <div class="line"></div>
+
+
+        <div class="step">
+
+          <div class="step-icon">
+            ✓
+          </div>
+
+          <div class="step-text">
+
+            <strong>
+              Dispatched
+            </strong>
+
+            <small>
+              Dispatched from Tamil Nadu
+            </small>
+
+          </div>
+
+        </div>
+
+
+        <div class="line"></div>
+
+
+        <div class="step current">
+
+          <div class="step-icon">
+            ●
+          </div>
+
+          <div class="step-text">
+
+            <strong>
+              In Transit
+            </strong>
+
+            <small>
+              ${parcel.distance} from dispatch point
+            </small>
+
           </div>
 
         </div>
 
       </div>
 
-      <!-- DELIVERY PROGRESS -->
-      <div class="status">
 
-        <div class="status-title">
-          📦 Delivery Progress
+      <div class="distance-box">
+
+        <div class="distance-title">
+          🚚 Current Parcel Movement
         </div>
 
-        <div class="step">
-          <div class="circle">✓</div>
-          <span>Registration Confirmed</span>
+
+        <div class="distance-track">
+
+          <span>
+            Dispatch
+          </span>
+
+
+          <div class="distance-bar">
+
+            <div class="distance-fill"></div>
+
+          </div>
+
+
+          <span>
+            20 KM
+          </span>
+
         </div>
 
-        <div class="step">
-          <div class="circle">✓</div>
-          <span>Book Prepared</span>
-        </div>
 
-        <div class="step">
-          <div class="circle">✓</div>
-          <span>Dispatched</span>
-        </div>
-
-        <div class="step">
-          <div class="circle current">→</div>
-          <span><b>In Transit</b></span>
-        </div>
-
-        <div class="step">
-          <div class="circle" style="background:#d1d5db;">5</div>
-          <span>Out for Delivery</span>
-        </div>
-
-        <div class="step">
-          <div class="circle" style="background:#d1d5db;">6</div>
-          <span>Delivered</span>
-        </div>
+        <p>
+          Parcel progress: <b>20 KM</b>
+          from the dispatch point.
+        </p>
 
       </div>
 
-    </div>
-
-    <div class="footer">
-      © 2026 Vishv Book Publisher • Delivery Status Portal
-    </div>
-
-  </div>
-</div>
+    `;
 
 
-<script>
-
-function checkStatus() {
-
-  const mobile = document.getElementById("mobile").value.trim();
-
-  const result = document.getElementById("result");
-  const error = document.getElementById("error");
-
-  result.style.display = "none";
-  error.style.display = "none";
-
-  // Registered mobile number
-  const registeredNumber = "9597561211";
-
-  if (mobile === registeredNumber) {
-
-    result.style.display = "block";
-
-  } else {
-
-    error.style.display = "block";
+    result.classList.remove("hidden");
 
   }
-}
 
-document.getElementById("mobile").addEventListener("input", function() {
-  this.value = this.value.replace(/\D/g, "").slice(0, 10);
-});
+
+  /* ==============================
+     CLOSE RESULT
+     ============================== */
+
+  function closeResult() {
+
+    document
+      .getElementById("result")
+      .classList.add("hidden");
+
+  }
+
+
+  /* ==============================
+     ENTER KEY SUPPORT
+     ============================== */
+
+  document
+    .getElementById("mobile")
+    .addEventListener("keydown", function(event) {
+
+      if (event.key === "Enter") {
+
+        trackParcel();
+
+      }
+
+    });
 
 </script>
 
 </body>
-</html>0
+</html>
